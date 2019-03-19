@@ -1,5 +1,7 @@
 import time
+
 global N
+
 # initialize the board
 
 # Function to reconstruct the board
@@ -10,10 +12,11 @@ def printboard(b):
     for i in range(num):
         for j in range(num):
             if b[i] == j:
-                print('1', end=' ')
+                print("1", end=" ")
             else:
-                print('0', end=' ')
+                print("0", end=" ")
         print()
+
 
 # Final test function - Without pruning
 
@@ -21,18 +24,19 @@ def printboard(b):
 def finaltest(board):
     num = len(board)
     if num > 1:
-        for i in range(num-1, 0, -1):
-            for j in range(i-1, -1, -1):
+        for i in range(num - 1, 0, -1):
+            for j in range(i - 1, -1, -1):
                 # checking Down
                 if board[i] == board[j]:
                     return False
                 # checking left diagonal up
-                if board[i] == board[j]+(i-j):
+                if board[i] == board[j] + (i - j):
                     return False
                 # checking right diagonal up
-                if board[i] == board[j]-(i-j):
+                if board[i] == board[j] - (i - j):
                     return False
     return True
+
 
 # Check for valid positions in the next row to place a queen
 
@@ -60,7 +64,7 @@ def checkPos(board):
 
 
 def bfs(board):
-        # initial state
+    # initial state
     global N
     queue = []
     queue.append(board)
@@ -84,7 +88,7 @@ def bfs(board):
 
 
 def bfsHigh(board):
-        # initial state
+    # initial state
     global N
     queue = []
     queue.append(board)
@@ -93,7 +97,7 @@ def bfsHigh(board):
         current = queue.pop(0)
         level = len(current)
         inval = checkPos(current)
-        if level < N-1:
+        if level < N - 1:
             for j in range(N):
                 if not j in inval:
                     newBoard = current[:]
@@ -108,13 +112,13 @@ def main():
     global N
     board = []
 
-    N = int(input('Enter N: '))
+    N = int(input("Enter N: "))
 
     start = time.time()
     solutions = bfsHigh(board)
     stop = time.time() - start
-    print('Results: ' + str(solutions))
-    print('Time: {:.4}'.format(stop))
+    print("Results: " + str(solutions))
+    print("Time: {:.4}".format(stop))
 
 
 # def main():
@@ -134,6 +138,5 @@ def main():
 #             printboard(f)
 #             s = '-' * N
 #             print(s)
-
 
 main()
