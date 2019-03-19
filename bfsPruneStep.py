@@ -43,10 +43,17 @@ def bfs(board):
         current = queue.pop(0)
         if len(current) != N:
             for j in range(N):
-                newBoard = current[:]
-                newBoard.append(j)
-                # if finaltest(newBoard):
-                queue.append(newBoard)
+                lastpos = 0
+                if(len(current) == 0):
+                    lastpos = N + 10
+                else:
+                    lastpos = current[len(current)-1]
+                if j < lastpos-1 or j > lastpos+1:
+                    newBoard = current[:]
+                    newBoard.append(j)
+                    # newBoard[level] += j + 1
+                    if finaltest(newBoard):
+                        queue.append(newBoard)
         else:
             queue.insert(0, current)
             break
@@ -65,18 +72,14 @@ def main():
 
     start = time.time()
     final = bfs(board)
-    results = []
-    for f in final:
-        if finaltest(f):
-            results.append(f)
     stop = time.time() - start
-    print('Results: ' + str(len(results)))
+    print('Results: ' + str(len(final)))
     print('Time: {:.4}'.format(stop))
     if(N < 7):
-        for r in results:
-            print(r)
-            printboard(r)
-            s = '--' * N
+        for f in final:
+            print(f)
+            printboard(f)
+            s = '-' * N
             print(s)
 
 
