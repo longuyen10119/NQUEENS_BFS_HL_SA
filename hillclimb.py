@@ -4,18 +4,23 @@ import numpy as np
 from inspect import signature
 from copy import deepcopy
 
+# Object Board with a board array
+# value attribute
+
 
 class Board:
     def __init__(self, *argw):
         if isinstance(argw[0], list):
             self.board = deepcopy(argw[0])
         elif isinstance(argw[0], int):
-            self.board = np.random.randint(low=0, high=argw[0], size=argw[0])
+            self.board = list(np.random.randint(
+                low=0, high=argw[0], size=argw[0]))
         self.value = -1
         self.calValue()
 
     def calValue(self):
         # Cost function
+        # For cost function we count directly and indirectly attacking queens
         self.value = 0
         for i in range(len(self.board) - 1):
             for j in range(i + 1, len(self.board)):
@@ -42,6 +47,8 @@ class Board:
                     listOfNeighbors.append(b)
         return listOfNeighbors
 
+# Print board function
+
 
 def printboard(b):
     board = b.board
@@ -54,12 +61,14 @@ def printboard(b):
                 print("0", end=" ")
         print()
 
+# Returns the best neighbor from a list of neighbors
+
 
 def getHighestNeighbor(listOfNeighbor):
-    min = -1
+    min = 9999999999
     pos = -1
     for i in range(len(listOfNeighbor)):
-        if min > listOfNeighbor[i].value:
+        if min >= listOfNeighbor[i].value:
             min = listOfNeighbor[i].value
             pos = i
     return listOfNeighbor[pos]
@@ -76,16 +85,24 @@ def hillCLimbing(problem):
 
 
 def main():
-    N = 4
+    print("HILL CLIMB FOR N QUEENS PROBLEM")
+    N = int(input("Enter N: "))
     initialBoard = Board(N)
-    print("Start state")
-    print(initialBoard.board)
 
-    result = hillCLimbing(initialBoard)
-    print("Finish")
-    print(result.board)
+    result = []
+    start = time.time()
+
+    while True:
+        result = hillCLimbing(initialBoard)
+        if result.value == 0:
+            break
+        else:  # restart
+            initialBoard = Board(N)
+
+    end = time.time() - start
+    print("Time taken: {:.2}".format(end))
     printboard(result)
+    print("Value " + str(result.value))
 
 
 main()
-
