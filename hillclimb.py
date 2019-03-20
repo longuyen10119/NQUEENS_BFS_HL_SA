@@ -100,7 +100,7 @@ def main():
             initialBoard = Board(N)
 
     end = time.time() - start
-    print("Time taken: {:.2}".format(end))
+    print("Time taken: {:.4}".format(end))
     printboard(result)
     print("Value " + str(result.value))
 

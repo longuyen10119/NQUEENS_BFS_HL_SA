@@ -95,13 +95,13 @@ def printboard(b):
 
 def main():
     print("SIMULATED ANNEALING FOR N QUEENS PROBLEM")
-    # N = int(input("Enter N: "))
-    N = 4
+    N = int(input("Enter N: "))
     initialBoard = Board(N)
     print(initialBoard.board)
-
+    start = time.time()
     SA(initialBoard)
-
+    end = time.time()-start
+    print('Time taken is {:.2}'.format(end))
     iterations = np.arange(len(values))
     fig = plt.figure(figsize=(12, 10))
     ax = fig.add_subplot(111)
