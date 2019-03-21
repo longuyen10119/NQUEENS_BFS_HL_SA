@@ -29,8 +29,9 @@ import math
 e1 = 1 / (3 + 1)
 e2 = 1 / (4 + 1)
 print(e1, e2)
-T = 1000
-result = math.exp(-(e1 - e2) / T*10000)
+T = 100
+
+result = math.exp(-(e1 - e2) / T*1500)
 print(result)
 # print(result)
 # count = 0

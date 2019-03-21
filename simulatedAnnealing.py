@@ -3,6 +3,21 @@
 #   current = E
 # but if worse:
 #   accept P = e to the power of -(E-E')/T
+
+
+# Config 1
+# K = 1000
+# T = 100
+# alpha = 0.9
+# prob = * 1500
+
+
+# Config 2
+# K = 10000
+# T = 0.1
+# alpha = 0.9999
+# prob = *1
+
 import matplotlib.pyplot as plt
 import random
 import time
@@ -12,8 +27,8 @@ import math
 
 iterations = []
 values = []
-K = 10000
-T = 10000
+K = 1000
+T = 100
 alpha = 0.9
 
 
@@ -73,7 +88,7 @@ def SA(board):
             if current.value <= newNeighbor.value:
                 current = newNeighbor
             else:
-                prob = math.exp(-(current.value - newNeighbor.value) / T*10000)
+                prob = math.exp(-(current.value - newNeighbor.value) / T*1500)
                 gen = np.random.rand(1, 1)
                 pick = gen[0]
                 if pick < prob:
@@ -101,9 +116,11 @@ def main():
     start = time.time()
     SA(initialBoard)
     end = time.time()-start
-    print('Time taken is {:.2}'.format(end))
+    print('Time taken is {:.4}'.format(end))
+
+    # Graph Objective values and K iterations
     iterations = np.arange(len(values))
-    fig = plt.figure(figsize=(12, 10))
+    fig = plt.figure(figsize=(18, 10))
     ax = fig.add_subplot(111)
     ax.plot(iterations, values, linewidth=0.5)
     plt.show()
