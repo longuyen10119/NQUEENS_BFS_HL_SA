@@ -73,6 +73,8 @@ def getHighestNeighbor(listOfNeighbor):
             pos = i
     return listOfNeighbor[pos]
 
+# Hill climbing function
+
 
 def hillCLimbing(problem):
     current = problem

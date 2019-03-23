@@ -1,6 +1,5 @@
 import time
 global N
-# initialize the board
 
 
 def printboard(b):
