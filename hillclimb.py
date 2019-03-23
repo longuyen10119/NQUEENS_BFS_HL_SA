@@ -103,7 +103,7 @@ def main():
 
         end = time.time() - start
         print('WHEN N =' + str(i))
-        print("Time taken: {:.4}".format(end))
+        print("Time taken: {:.4f}".format(end))
         if(i+1 <= 8):
             printboard(result)
             print("Value " + str(result.value))

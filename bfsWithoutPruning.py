@@ -1,6 +1,9 @@
 import time
 global N
 
+# Print board function
+# Reconstruct the board from 1d array
+
 
 def printboard(b):
     num = len(b)
@@ -44,7 +47,6 @@ def bfs(board):
             for j in range(N):
                 newBoard = current[:]
                 newBoard.append(j)
-                # if finaltest(newBoard):
                 queue.append(newBoard)
         else:
             queue.insert(0, current)
@@ -54,29 +56,31 @@ def bfs(board):
 
 def main():
     global N
-    board = []
 
-    N = int(input('Enter N: '))
-    # initialize the board
-    # for i in range(N):
-    #     row = [-1] * N
-    #     board.append(row)
+    val = int(input('Enter N: '))
 
-    start = time.time()
-    final = bfs(board)
-    results = []
-    for f in final:
-        if finaltest(f):
-            results.append(f)
-    stop = time.time() - start
-    print('Results: ' + str(len(results)))
-    print('Time: {:.4}'.format(stop))
-    if(N < 7):
-        for r in results:
-            print(r)
-            printboard(r)
-            s = '--' * N
-            print(s)
+    for i in range(4, val+1):
+        N = i
+        board = []
+        start = time.time()
+        final = bfs(board)
+        results = []
+        # Test all possible solutions BFS returns
+        for f in final:
+            if finaltest(f):
+                results.append(f)
+        stop = time.time() - start
+        print('WHEN N = {}'.format(i))
+        print('Results: ' + str(len(results)))
+        print('Time: {:.4f}'.format(stop))
+        if(i < 7):
+            for r in results:
+                # print(r)
+                printboard(r)
+                s = '--' * N
+                print(s)
+        s = '_________________________________'
+        print(s)
 
 
 main()

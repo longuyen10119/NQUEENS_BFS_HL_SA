@@ -72,16 +72,14 @@ def bfs(board):
     while True:
         current = queue.pop(0)
         level = len(current)
-
-        if level != N:
+        if level != N:  # if not at the last row
             inval = checkPos(current)
             for j in range(N):
                 if not j in inval:
                     newBoard = current[:]
                     newBoard.append(j)
-                    # if finaltest(newBoard):
                     queue.append(newBoard)
-        else:
+        else:  # if the board is full, put back to queue
             queue.insert(0, current)
             break
     return queue
@@ -110,33 +108,29 @@ def bfsHigh(board):
 
 def main():
     global N
-    board = []
 
-    N = int(input("Enter N: "))
+    val = int(input("Enter N: "))
+    for i in range(4, val+1):
+        N = i
+        print('WHEN N=' + str(i))
+        board = []
+        start = time.time()
+        solutions = []
+        if i < 7:
+            solutions = bfs(board)
+            stop = time.time() - start
+            print('Results: ' + str(len(solutions)))
+            print('Time: {:.4}'.format(stop))
+            for f in solutions:
+                printboard(f)
+                s = '--' * N
+                print(s)
+        else:
+            solutions = bfsHigh(board)
+            stop = time.time() - start
+            print("Results: " + str(solutions))
+            print("Time: {:.4f}".format(stop))
+        print('_______________________________')
 
-    start = time.time()
-    solutions = bfsHigh(board)
-    stop = time.time() - start
-    print("Results: " + str(solutions))
-    print("Time: {:.4}".format(stop))
-
-
-# def main():
-#     global N
-#     board = []
-
-#     N = int(input('Enter N: '))
-
-#     start = time.time()
-#     final = bfs(board)
-#     stop = time.time() - start
-#     print('Results: ' + str(len(final)))
-#     print('Time: {:.4}'.format(stop))
-#     if(N < 7):
-#         for f in final:
-#             print(f)
-#             printboard(f)
-#             s = '-' * N
-#             print(s)
 
 main()

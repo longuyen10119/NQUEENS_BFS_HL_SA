@@ -63,10 +63,13 @@ class Board:
         return self.value
 
     def pickNextRandomNeighbor(self):
+        # pick a random number for row
         pickRow = np.random.randint(low=0, high=len(self.board))
         current = self.board[pickRow]
         pickCol = np.random.randint(low=0, high=len(self.board))
-
+        # when picking a random for column
+        # make sure to pick a different number
+        # from current
         while pickCol == current:
             pickCol = np.random.randint(low=0, high=len(self.board))
         # Maybe no need to deep copy self.board
@@ -81,7 +84,7 @@ def SA(board):
     while True:
         current = board
         for i in range(0, K):
-            values.append(current.value)
+            # values.append(current.value)
             if current.value == 1:
                 return current
             newNeighbor = current.pickNextRandomNeighbor()
@@ -115,13 +118,13 @@ def main():
     print("SIMULATED ANNEALING FOR N QUEENS PROBLEM")
     N = int(input("Enter N: "))
 
-    for i in range(28, N+1):
+    for i in range(4, N+1):
         initialBoard = Board(i)
         start = time.time()
         SA(initialBoard)
         end = time.time()-start
         print('WHEN N = '+str(i), end=' ')
-        print('Time taken is {:.4}'.format(end))
+        print('Time taken is {:.4f}'.format(end))
 
         # Graph Objective values and K iterations
         # iterations = np.arange(len(values))
