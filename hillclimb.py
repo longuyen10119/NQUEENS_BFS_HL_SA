@@ -89,22 +89,24 @@ def hillCLimbing(problem):
 def main():
     print("HILL CLIMB FOR N QUEENS PROBLEM")
     N = int(input("Enter N: "))
-    initialBoard = Board(N)
 
-    result = []
-    start = time.time()
+    for i in range(4, N+1):
+        initialBoard = Board(i)
+        result = []
+        start = time.time()
+        while True:
+            result = hillCLimbing(initialBoard)
+            if result.value == 0:
+                break
+            else:  # restart
+                initialBoard = Board(i)
 
-    while True:
-        result = hillCLimbing(initialBoard)
-        if result.value == 0:
-            break
-        else:  # restart
-            initialBoard = Board(N)
-
-    end = time.time() - start
-    print("Time taken: {:.4}".format(end))
-    printboard(result)
-    print("Value " + str(result.value))
+        end = time.time() - start
+        print('WHEN N =' + str(i))
+        print("Time taken: {:.4}".format(end))
+        if(i+1 <= 8):
+            printboard(result)
+            print("Value " + str(result.value))
 
 
 main()

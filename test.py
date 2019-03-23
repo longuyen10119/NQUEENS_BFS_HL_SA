@@ -26,12 +26,12 @@ import numpy as np
 
 import math
 
-e1 = 1 / (3 + 1)
-e2 = 1 / (4 + 1)
+e1 = 1 / (5 + 1)
+e2 = 1 / (2 + 1)
 print(e1, e2)
 T = 100
 
-result = math.exp(-(e1 - e2) / T*1500)
+result = math.exp(-(e1 - e2) / T*1000)
 print(result)
 # print(result)
 # count = 0

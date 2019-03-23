@@ -85,15 +85,18 @@ def SA(board):
             if current.value == 1:
                 return current
             newNeighbor = current.pickNextRandomNeighbor()
-            if current.value <= newNeighbor.value:
+            if current.value <= newNeighbor.value:  # when neighbor is better
                 current = newNeighbor
             else:
+                # accept bad change with a possiblity p
                 prob = math.exp(-(current.value - newNeighbor.value) / T*1500)
                 gen = np.random.rand(1, 1)
                 pick = gen[0]
                 if pick < prob:
                     current = newNeighbor
         T = alpha * T
+
+# Print board function
 
 
 def printboard(b):
@@ -111,19 +114,21 @@ def printboard(b):
 def main():
     print("SIMULATED ANNEALING FOR N QUEENS PROBLEM")
     N = int(input("Enter N: "))
-    initialBoard = Board(N)
-    print(initialBoard.board)
-    start = time.time()
-    SA(initialBoard)
-    end = time.time()-start
-    print('Time taken is {:.4}'.format(end))
 
-    # Graph Objective values and K iterations
-    iterations = np.arange(len(values))
-    fig = plt.figure(figsize=(18, 10))
-    ax = fig.add_subplot(111)
-    ax.plot(iterations, values, linewidth=0.5)
-    plt.show()
+    for i in range(28, N+1):
+        initialBoard = Board(i)
+        start = time.time()
+        SA(initialBoard)
+        end = time.time()-start
+        print('WHEN N = '+str(i), end=' ')
+        print('Time taken is {:.4}'.format(end))
+
+        # Graph Objective values and K iterations
+        # iterations = np.arange(len(values))
+        # fig = plt.figure(figsize=(18, 10))
+        # ax = fig.add_subplot(111)
+        # ax.plot(iterations, values, linewidth=0.5)
+        # plt.show()
 
 
 main()
