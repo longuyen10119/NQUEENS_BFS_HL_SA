@@ -27,7 +27,7 @@ import math
 
 iterations = []
 values = []
-K = 5000
+K = 3000
 T = 100
 alpha = 0.9
 
